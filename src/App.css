@@ -2,13 +2,14 @@
   padding:0;
   margin:0;
 }
-.button{
+.css-button, .dropdown-btn{
   border-radius:10px;
   padding: 5px 10px;
   border: 1px solid black;
   box-shadow: 0 4px #999;
+  font-size:1rem;
 }
-.button:active{
+.css-button:active{
   background-color:white;
   box-shadow: 0 2px #999;
   transform: translateY(2px);
@@ -23,6 +24,8 @@
   height: 10vh;
   margin: auto;
   text-align: center;
+  font-size: 2rem;
+  font-family:'Courier New', Courier, monospace;
 }
 #content{
   width:100vw;
@@ -36,7 +39,7 @@
   width: 60vw;
   height: 80vh;
   border: 2px outset darkgray;
-  background-color:white;
+  background-color: rgb(40, 40, 40);
   display:flex;
   flex-wrap:wrap;
   z-index:0;
@@ -50,7 +53,7 @@
   width:150px;
   height: 50px;
   border-radius: 15px;
-  margin:5px;
+  border: 1px solid black;
 }
 .orange-box::before{
   text-align:start;
@@ -69,18 +72,27 @@
   position:relative;
   display:inline-block;
 }
-.dropdown-btn{
-  background-color: darkgray;
-  padding:16px;
-}
 .dropdown-options{
   display:none;
   position: absolute;
   border: 1px solid black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
+
 .dropdown:hover .dropdown-options {
   display: block;
+}
+
+.option-btn{
+  text-align:center;
+  display: block;
+  font-size: .8rem;
+  border:1px solid darkgray;
+  width:100%;
+}
+.option-btn:active{
+  background-color: rgb(122, 122, 122);
 }
 #user-control{
   margin:auto;

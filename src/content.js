@@ -4,13 +4,15 @@ export default class Content extends React.Component{
   constructor(props){
     super(props)
     this.state ={
-
+      justifyDirection: 'right',
     }
     this.handleAddContentClick = this.handleAddContentClick.bind(this);
     this.handleChangeDirectionClick = this.handleChangeDirectionClick.bind(this);
     this.handleJustifyClick = this.handleJustifyClick.bind(this);
   }
+  componentDidMount(){
 
+  }
   handleAddContentClick(){
     let addContent = document.createElement('div');
     let addText = document.createTextNode('Content');
@@ -20,7 +22,7 @@ export default class Content extends React.Component{
     playground.appendChild(addContent);
   }
 
-  handleChangeDirectionClick(){
+  handleChangeDirectionClick(dir){
     let playground = document.getElementById('playground');
     if (playground.style.flexDirection === 'column'){
       playground.style.flexDirection = 'row';
@@ -35,21 +37,31 @@ export default class Content extends React.Component{
   }
 
   render(){
+    // const classSettings = document.getElementsByClassName('orange-box');
+    // const style = window.getComputedStyle(classSettings[0]);
+    // console.log(style);
     return(
       <div id="content">
         <div id="playground">
           <div className="orange-box">Content</div>
         </div>
         <div id="user-control">
-          <button className="button" onClick={this.handleAddContentClick}>Add Content</button>
-          <button className="button" onClick={this.handleChangeDirectionClick}>Change Flex Direction</button>
-          <button value="flex-end" className="button" onClick={e => this.handleJustifyClick(e.target.value)}>Justify left</button>
+          <button className="css-button" onClick={this.handleAddContentClick}>Add Content</button>
+          <button className="css-button" onClick={this.handleChangeDirectionClick}>Change Flex Direction</button>
           <div className="dropdown">
             <button className="dropdown-btn">Justify</button>
             <div className="dropdown-options">
-              <a value="flex-end" href={e => this.handleJustifyClick(e.target.value)}>Justify end</a>
+              <button className="option-btn" value="flex-end" onClick={e => this.handleJustifyClick(e.target.value)}>Flex end</button>
+              <button className="option-btn" value="flex-start" onClick={e => this.handleJustifyClick(e.target.value)}>Flex start</button>
+              <button className="option-btn" value="center" onClick={e => this.handleJustifyClick(e.target.value)}>Center</button>
+              <button className="option-btn" value="space-between" onClick={e => this.handleJustifyClick(e.target.value)}>Space between</button>
+              <button className="option-btn" value="space-around" onClick={e => this.handleJustifyClick(e.target.value)}>Space around</button>
+              <button className="option-btn" value="space-evenly" onClick={e => this.handleJustifyClick(e.target.value)}>Space evenly</button>
             </div>
           </div>
+        </div>
+        <div className="object-css">
+          {/* {style} */}
         </div>
       </div>
     )
