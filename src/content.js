@@ -1,29 +1,33 @@
 import React from 'react';
 
+let contentArr = [];
+let divArr = [];
+
 export default class Content extends React.Component{
   constructor(props){
     super(props)
     this.state ={
       justifyDirection: 'right',
+      contentCounter: 0,
+      divCounter: 0,
+      selectedDiv: 'playground',
     }
-    this.handleAddContentClick = this.handleAddContentClick.bind(this);
-    this.handleChangeDirectionClick = this.handleChangeDirectionClick.bind(this);
-    this.handleJustifyClick = this.handleJustifyClick.bind(this);
   }
   componentDidMount(){
 
   }
-  handleAddContentClick(){
+  handleAddContentClick = () =>{
+    const playground = document.getElementById('playground');
     let addContent = document.createElement('div');
     let addText = document.createTextNode('Content');
     addContent.appendChild(addText);
     addContent.classList.add('orange-box');
-    let playground = document.getElementById('playground');
     playground.appendChild(addContent);
+    this.addContent();
   }
 
-  handleChangeDirectionClick(dir){
-    let playground = document.getElementById('playground');
+  handleChangeDirectionClick= () =>{
+    const playground = document.getElementById('playground');
     if (playground.style.flexDirection === 'column'){
       playground.style.flexDirection = 'row';
     } else{
@@ -31,19 +35,50 @@ export default class Content extends React.Component{
     }
   }
   
-  handleJustifyClick(alignment){
+  handleJustifyClick = (alignment) =>{
     const playground = document.getElementById('playground');
     playground.style.justifyContent = alignment;
   }
 
+  addContent = () =>{
+    let newContent = {
+      key: this.state.contentCounter + 1,
+    };
+    this.setState({
+      contentCounter: (this.state.contentCounter + 1),
+    });
+    contentArr.push(newContent);
+  }
+
+  handleAddNewDiv = () =>{
+    let newDiv = document.createElement('div');
+    newDiv.classList.add('new-div');
+    newDiv.setAttribute('id', this.state.divCounter + 1);
+    if (this.state.selectedDiv !== 'playground'){
+      let divToAdd = document.getElementById(this.state.selectedDiv);
+      divToAdd.appendChild(newDiv);
+    }
+    else{
+      const playground = document.getElementById('playground');
+      playground.appendChild(newDiv);
+    }
+    this.addDiv();
+  }
+
+  addDiv = () =>{
+    let newDiv = {
+      key:this.state.divCounter +1,
+    }
+    this.setState({
+      divCounter : this.state.divCounter + 1,
+    });
+    divArr.push(newDiv);
+  };
+
   render(){
-    // const classSettings = document.getElementsByClassName('orange-box');
-    // const style = window.getComputedStyle(classSettings[0]);
-    // console.log(style);
     return(
       <div id="content">
         <div id="playground">
-          <div className="orange-box">Content</div>
         </div>
         <div id="user-control">
           <button className="css-button" onClick={this.handleAddContentClick}>Add Content</button>
@@ -59,6 +94,7 @@ export default class Content extends React.Component{
               <button className="option-btn" value="space-evenly" onClick={e => this.handleJustifyClick(e.target.value)}>Space evenly</button>
             </div>
           </div>
+          <button className="css-button" onClick={this.handleAddNewDiv}>Add Div</button>
         </div>
         <div className="object-css">
           {/* {style} */}

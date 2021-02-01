@@ -45,6 +45,9 @@
   z-index:0;
   overflow: hidden;
 }
+#playground .new-div{
+  border: 1px dotted gray;
+}
 .orange-box{
   background-color:orangered;
   text-align:center;
